@@ -8,3 +8,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Level.create([
+               { level: 1, required: 10, energy: 15 },
+               { level: 2, required: 12, energy: 15 },
+               { level: 3, required: 14, energy: 16 },
+               { level: 4, required: 16, energy: 16 },
+               { level: 5, required: 18, energy: 17 },
+               { level: 6, required: 20, energy: 17 },
+               { level: 7, required: 10, energy: 18 },
+               { level: 8, required: 10, energy: 18 },
+               { level: 9, required: 10, energy: 19 }
+             ])
