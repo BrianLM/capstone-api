@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127151044) do
+ActiveRecord::Schema.define(version: 20171127153212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "creatures", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "c_hp"
+    t.integer  "c_def"
+    t.integer  "c_dex"
+    t.integer  "c_spd"
+    t.integer  "c_int"
+    t.integer  "c_sig"
+    t.integer  "c_str"
+    t.integer  "m_hp"
+    t.integer  "m_def"
+    t.integer  "m_dex"
+    t.integer  "m_spd"
+    t.integer  "m_int"
+    t.integer  "m_sig"
+    t.integer  "m_str"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_creatures_on_user_id", using: :btree
+  end
 
   create_table "examples", force: :cascade do |t|
     t.text     "text",       null: false
@@ -82,6 +103,7 @@ ActiveRecord::Schema.define(version: 20171127151044) do
     t.index ["token"], name: "index_users_on_token", unique: true, using: :btree
   end
 
+  add_foreign_key "creatures", "users"
   add_foreign_key "examples", "users"
   add_foreign_key "explorations", "users"
   add_foreign_key "items", "users"
