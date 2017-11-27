@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127153212) do
+ActiveRecord::Schema.define(version: 20171127153420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,29 @@ ActiveRecord::Schema.define(version: 20171127153212) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.integer  "creature_id"
+    t.integer  "user_id"
+    t.integer  "c_hp"
+    t.integer  "c_def"
+    t.integer  "c_dex"
+    t.integer  "c_spd"
+    t.integer  "c_int"
+    t.integer  "c_sig"
+    t.integer  "c_str"
+    t.integer  "m_hp"
+    t.integer  "m_def"
+    t.integer  "m_dex"
+    t.integer  "m_spd"
+    t.integer  "m_int"
+    t.integer  "m_sig"
+    t.integer  "m_str"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["creature_id"], name: "index_parts_on_creature_id", using: :btree
+    t.index ["user_id"], name: "index_parts_on_user_id", using: :btree
+  end
+
   create_table "user_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "experience"
@@ -108,5 +131,7 @@ ActiveRecord::Schema.define(version: 20171127153212) do
   add_foreign_key "explorations", "users"
   add_foreign_key "items", "users"
   add_foreign_key "jobs", "users"
+  add_foreign_key "parts", "creatures"
+  add_foreign_key "parts", "users"
   add_foreign_key "user_profiles", "users"
 end
