@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127155322) do
+ActiveRecord::Schema.define(version: 20171127192437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 20171127155322) do
     t.index ["user_id"], name: "index_creatures_on_user_id", using: :btree
   end
 
+  create_table "encounters", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "exploration_id"
+    t.integer  "c_hp"
+    t.integer  "c_def"
+    t.integer  "c_dex"
+    t.integer  "c_spd"
+    t.integer  "c_int"
+    t.integer  "c_sig"
+    t.integer  "c_str"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["exploration_id"], name: "index_encounters_on_exploration_id", using: :btree
+    t.index ["user_id"], name: "index_encounters_on_user_id", using: :btree
+  end
+
   create_table "examples", force: :cascade do |t|
     t.text     "text",       null: false
     t.integer  "user_id",    null: false
@@ -51,8 +67,10 @@ ActiveRecord::Schema.define(version: 20171127155322) do
     t.integer  "top_m"
     t.integer  "top_p"
     t.integer  "top_d"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "encounter_id"
+    t.index ["encounter_id"], name: "index_explorations_on_encounter_id", using: :btree
     t.index ["user_id"], name: "index_explorations_on_user_id", using: :btree
   end
 
@@ -128,7 +146,10 @@ ActiveRecord::Schema.define(version: 20171127155322) do
   end
 
   add_foreign_key "creatures", "users"
+  add_foreign_key "encounters", "explorations"
+  add_foreign_key "encounters", "users"
   add_foreign_key "examples", "users"
+  add_foreign_key "explorations", "encounters"
   add_foreign_key "explorations", "users"
   add_foreign_key "items", "users"
   add_foreign_key "jobs", "users"

@@ -1,6 +1,6 @@
 class Exploration < ApplicationRecord
   belongs_to :user
-
+  has_one :encounter
   after_initialize :set_defaults, unless: :persisted?
 
   def set_defaults
