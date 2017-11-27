@@ -1,4 +1,4 @@
-class CreaturesController < ApplicationController
+class CreaturesController < ProtectedController
   before_action :set_creature, only: [:show, :update, :destroy]
 
   # GET /creatures

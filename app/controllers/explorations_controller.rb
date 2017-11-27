@@ -1,4 +1,4 @@
-class ExplorationsController < ApplicationController
+class ExplorationsController < ProtectedController
   before_action :set_exploration, only: [:show, :update, :destroy]
 
   # GET /explorations

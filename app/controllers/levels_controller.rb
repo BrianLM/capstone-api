@@ -1,4 +1,4 @@
-class LevelsController < ApplicationController
+class LevelsController < ProtectedController
   before_action :set_level, only: [:show, :update, :destroy]
 
   # GET /levels

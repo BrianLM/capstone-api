@@ -1,4 +1,4 @@
-class UserProfilesController < ApplicationController
+class UserProfilesController < ProtectedController
   before_action :set_user_profile, only: [:show, :update, :destroy]
 
   # GET /user_profiles
