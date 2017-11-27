@@ -4,12 +4,12 @@ API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/explorations"
 curl "${API}${URL_PATH}" \
   --include \
-  --request PATCH \
+  --request POST \
   --header "Content-Type: application/json" \
-  --header "Authorization: Token token=BAhJIiVhZjI0ZTZjYTcxOGNiN2NmM2ZhNGRmYWNkYTIzZGVhYwY6BkVG--44d6a49c9ba7b64994edae9201a8eda8bbe16568" \
+  --header "Authorization: Token token=BAhJIiU2OWU1MmMwOTRlOWExZjFhMGU5ZjAwNGJmYTgxNWU2NQY6BkVG--da78d263517fc28a57809631aa6d1946412cc22e" \
   --data '{
     "exploration": {
-      "current": "Forest, none"
+      "area": "Forest"
     }
   }'
 
