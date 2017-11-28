@@ -157,6 +157,7 @@ class ExplorationsController < ProtectedController
       level_up = Level.find_by(level: @current_user_profile.level)
       @current_user_profile.energy = level_up.energy
       @current_user_profile.experience = 0
+      @current_user.stat_points += 1
     end
   end
 
