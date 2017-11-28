@@ -31,17 +31,46 @@ class CreaturesController < ProtectedController
   def valid_increase
     to_check = @stat.sub('c', 'm')
     m_val = current_user.creature[to_check]
-    p @stat
-    p current_user.creature[:c_hp]
-    p m_val >= @requested + current_user.creature[@stat]
+    m_val >= @requested + current_user.creature[@stat]
+  end
+
+  def can_evolve
+    @creature.c_hp == @creature.m_hp &&
+      @creature.c_dex == @creature.m_dex &&
+      @creature.c_def == @creature.m_def &&
+      @creature.c_sig == @creature.m_sig &&
+      @creature.c_spd == @creature.m_spd &&
+      @creature.c_str == @creature.m_str &&
+      @creature.c_int == @creature.m_int
+  end
+
+  def do_evolve
+    @error = 'Cannot evolve at this time' unless can_evolve
+    @creature.m_hp *= 1.2
+    @creature.m_def *= 1.2
+    @creature.m_dex *= 1.2
+    @creature.m_spd *= 1.2
+    @creature.m_int *= 1.2
+    @creature.m_sig *= 1.2
+    @creature.m_str *= 1.2
+    @creature.c_hp *= 0.8
+    @creature.c_def *= 0.8
+    @creature.c_dex *= 0.8
+    @creature.c_spd *= 0.8
+    @creature.c_int *= 0.8
+    @creature.c_sig *= 0.8
+    @creature.c_str *= 0.8
   end
 
   # PATCH/PUT /creatures/1
   def update
-    @error = 'Invalid argument count' unless creature_params.keys.count == 1
-    @error = 'Insufficient available to increase' unless can_increase
-    @error = 'Cannot exceed maximum value' unless valid_increase
-    p @error
+    if params.key? :evolve
+      do_evolve
+    else
+      @error = 'Invalid argument count' unless creature_params.keys.count == 1
+      @error = 'Insufficient available to increase' unless can_increase
+      @error = 'Cannot exceed maximum value' unless valid_increase
+    end
     if !@error
       # if @creature.update(creature_params)
       #   render json: @creature
