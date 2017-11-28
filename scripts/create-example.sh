@@ -6,11 +6,11 @@ curl "${API}${URL_PATH}" \
   --include \
   --request PATCH \
   --header "Content-Type: application/json" \
-  --header "Authorization: Token token=BAhJIiU4YWY4OGRmMzEwNzhjMDQzOWY1NmMwZDcwZjc3OGFlOQY6BkVG--e37b1f6db1396bd9ba45c9514e51f5fbe1dc4f43" \
+  --header "Authorization: Token token=BAhJIiVlMGQxNjFmYTcyNTZjN2ExNTBmOGEwMTZmZTY5ODczNAY6BkVG--d4889a450f78847774a28bb784de8d8283fe07d4" \
   --data '{
     "exploration": {
       "area": "Desert",
-      "dif": 1
+      "dif": 0
     }
   }'
 
