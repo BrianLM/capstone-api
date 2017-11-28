@@ -1,4 +1,4 @@
 class CreatureSerializer < ActiveModel::Serializer
   attributes :id, :c_hp, :c_def, :c_dex, :c_spd, :c_int, :c_sig, :c_str, :m_hp, :m_def, :m_dex, :m_spd, :m_int, :m_sig, :m_str
-  has_one :user
+  # has_one :user
 end
