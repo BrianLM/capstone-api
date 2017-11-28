@@ -47,7 +47,7 @@ class UserProfilesController < ProtectedController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user_profile
-    @user_profile = UserProfile.find(params[:id])
+    @user_profile = current_user.user_profile
   end
 
   # Only allow a trusted parameter "white list" through.
