@@ -4,6 +4,7 @@ class Creature < ApplicationRecord
   after_initialize :set_defaults, unless: :persisted?
 
   def set_defaults
+    self.damage = 0
     self.c_hp ||= rand(25..30)
     self.c_def ||= rand(4..10)
     self.c_dex ||= rand(4..10)

@@ -104,7 +104,15 @@ class ExplorationsController < ProtectedController
     crit = first.c_int > rand(100)
     hit = first.c_sig - second.c_dex + 80 > rand(100) || crit
     damage = (first.c_str * 2) - second.c_def if hit
+    c_hp = second.c_hp
     second.c_hp -= damage if damage
+    if second.class.name == 'Creature'
+      if second.c_hp.negative?
+        second.damage += c_hp
+      else
+        second.damage += damage
+      end
+    end
     second.save
   end
 
@@ -128,6 +136,8 @@ class ExplorationsController < ProtectedController
 
   def resolve_encounter
     @encounter.destroy
+    restore = @user_creature.c_hp + @user_creature.damage
+    @user_creature.update(c_hp: restore, damage: 0)
     resolve_exploration if @exploration.step == @exploration.end &&
                            @user_creature.c_hp.positive?
 
