@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # resources :parts
-  # resources :creatures
-  # resources :items
-  # resources :jobs
+  resources :parts
+  resources :creatures
+  resources :items
+  resources :jobs
   resources :explorations
   resources :levels, only: [:index]
   resources :user_profiles, only: [:show]

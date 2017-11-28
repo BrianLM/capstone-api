@@ -206,7 +206,7 @@ class ExplorationsController < ProtectedController
         render json: @errors, status: :unprocessable_entity
       end
     else
-      render json: @errors, status: :unprocessable_entity
+      render json: @errors, status: :bad_request
     end
   end
 
