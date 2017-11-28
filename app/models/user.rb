@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :user_profile
   has_one :creature
   has_one :exploration
+  has_one :encounter
   has_many :items
   has_many :jobs
   has_many :parts
