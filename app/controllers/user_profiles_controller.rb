@@ -16,17 +16,16 @@ class UserProfilesController < ProtectedController
     render json: @user_profile
   end
 
-  # Profile creation done on new user signup
   # POST /user_profiles
-  # def create
-  #   @user_profile = UserProfile.new(user_profile_params)
-  #
-  #   if @user_profile.save
-  #     render json: @user_profile, status: :created, location: @user_profile
-  #   else
-  #     render json: @user_profile.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def create
+    @user_profile = UserProfile.new(user_profile_params)
+
+    if @user_profile.save
+      render json: @user_profile, status: :created, location: @user_profile
+    else
+      render json: @user_profile.errors, status: :unprocessable_entity
+    end
+  end
 
   # No use case to update, other actions should apply the changes
   # PATCH/PUT /user_profiles/1

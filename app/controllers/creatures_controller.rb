@@ -72,11 +72,13 @@ class CreaturesController < ProtectedController
       @error = 'Cannot exceed maximum value' unless valid_increase
     end
     if !@error
-      # if @creature.update(creature_params)
-      #   render json: @creature
-      # else
-      #   render json: @creature.errors, status: :unprocessable_entity
-      # end
+      if @creature.update(creature_params)
+        diff = current_user.user_profile.stat_points - @requested
+        current_user.user_profile.update(stat_points: diff)
+        render json: @creature
+      else
+        render json: @creature.errors, status: :unprocessable_entity
+      end
     else
       render json: @error, status: :bad_request
     end
