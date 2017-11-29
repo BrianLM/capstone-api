@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :creatures
   resources :explorations
-  resources :levels, only: [:index]
+  resources :levels, only: [:index, :show]
   resources :user_profiles, only: [:show, :create]
   post '/sign-up' => 'users#signup'
   post '/sign-in' => 'users#signin'

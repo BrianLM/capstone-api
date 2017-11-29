@@ -15,7 +15,7 @@ Level.create([
                { level: 4, required: 16, energy: 16 },
                { level: 5, required: 18, energy: 17 },
                { level: 6, required: 20, energy: 17 },
-               { level: 7, required: 10, energy: 18 },
-               { level: 8, required: 10, energy: 18 },
-               { level: 9, required: 10, energy: 19 }
+               { level: 7, required: 22, energy: 18 },
+               { level: 8, required: 24, energy: 18 },
+               { level: 9, required: 26, energy: 19 }
              ])

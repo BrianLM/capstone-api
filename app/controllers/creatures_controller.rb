@@ -70,9 +70,11 @@ class CreaturesController < ProtectedController
       @error = 'Invalid argument count' unless creature_params.keys.count == 1
       @error = 'Insufficient available to increase' unless can_increase
       @error = 'Cannot exceed maximum value' unless valid_increase
+      new_stat = @creature[@stat] + creature_params[@stat]
+      @new_param = { @stat => new_stat }
     end
     if !@error
-      if @creature.update(creature_params)
+      if @creature.update(@new_param)
         diff = current_user.user_profile.stat_points - @requested
         current_user.user_profile.update(stat_points: diff)
         render json: @creature
