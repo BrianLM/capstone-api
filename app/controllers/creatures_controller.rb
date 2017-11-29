@@ -62,6 +62,14 @@ class CreaturesController < ProtectedController
     @creature.c_str *= 0.8
   end
 
+  def do_increase
+    p 'In do_increase'
+    @creature[@stat] += creature_params[@stat]
+    p @creature[@stat]
+    diff = current_user.user_profile.stat_points - @requested
+    current_user.user_profile.update(stat_points: diff)
+  end
+
   # PATCH/PUT /creatures/1
   def update
     if params.key? :evolve
@@ -70,13 +78,10 @@ class CreaturesController < ProtectedController
       @error = 'Invalid argument count' unless creature_params.keys.count == 1
       @error = 'Insufficient available to increase' unless can_increase
       @error = 'Cannot exceed maximum value' unless valid_increase
-      new_stat = @creature[@stat] + creature_params[@stat]
-      @new_param = { @stat => new_stat }
+      do_increase unless @error
     end
     if !@error
-      if @creature.update(@new_param)
-        diff = current_user.user_profile.stat_points - @requested
-        current_user.user_profile.update(stat_points: diff)
+      if @creature.save
         render json: @creature
       else
         render json: @creature.errors, status: :unprocessable_entity
