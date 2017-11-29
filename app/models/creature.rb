@@ -6,12 +6,12 @@ class Creature < ApplicationRecord
   def set_defaults
     self.damage = 0
     self.c_hp ||= rand(25..30)
-    self.c_def ||= rand(4..10)
-    self.c_dex ||= rand(4..10)
-    self.c_spd ||= rand(4..10)
-    self.c_int ||= rand(4..10)
-    self.c_sig ||= rand(4..10)
-    self.c_str ||= rand(4..10)
+    self.c_def ||= rand(5..10)
+    self.c_dex ||= rand(5..10)
+    self.c_spd ||= rand(5..10)
+    self.c_int ||= rand(5..10)
+    self.c_sig ||= rand(5..10)
+    self.c_str ||= rand(5..10)
     self.m_hp ||= c_hp * 1.2
     self.m_def ||= c_def * 1.2
     self.m_dex ||= c_dex * 1.2
