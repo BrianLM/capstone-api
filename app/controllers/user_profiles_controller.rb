@@ -7,7 +7,7 @@ class UserProfilesController < ProtectedController
     last_spent = @user_profile.els
     time_diff =  (DateTime.now.utc - last_spent).to_i
     recovery = (time_diff / 180) / 3
-    if recovery > @max_energy || recovery == max_energy
+    if recovery > @max_energy || recovery == @max_energy
       @user_profile.update(energy: @max_energy, els: nil)
     else
       new_energy = recovery + @user_profile.energy
