@@ -3,16 +3,22 @@
 class UserProfilesController < ProtectedController
   before_action :set_user_profile, only: [:show, :update, :destroy]
 
-  # No use case to index user profiles.
-  # GET /user_profiles
-  # def index
-  #   @user_profiles = UserProfile.all
-  #
-  #   render json: @user_profiles
-  # end
+  def check_energy
+    last_spent = @user_profile.els
+    time_diff =  (DateTime.now.utc - last_spent).to_i
+    recovery = (time_diff / 180) / 3
+    max_energy = Level.find_by(level: @user_profile.level).energy
+    if recovery > max_energy || recovery == max_energy
+      @user_profile.update(energy: max_energy, els: nil)
+    else
+      new_els = last_spent + (recovery * 180)
+      @user_profile.update(energy: recovery, els: new_els)
+    end
+  end
 
   # GET /user_profiles/1
   def show
+    check_energy unless @user_profile.els.nil?
     render json: @user_profile
   end
 
@@ -26,22 +32,6 @@ class UserProfilesController < ProtectedController
       render json: @user_profile.errors, status: :unprocessable_entity
     end
   end
-
-  # No use case to update, other actions should apply the changes
-  # PATCH/PUT /user_profiles/1
-  # def update
-  #   if @user_profile.update(user_profile_params)
-  #     render json: @user_profile
-  #   else
-  #     render json: @user_profile.errors, status: :unprocessable_entity
-  #   end
-  # end
-
-  # No use case to delete.
-  # DELETE /user_profiles/1
-  # def destroy
-  #   @user_profile.destroy
-  # end
 
   private
 

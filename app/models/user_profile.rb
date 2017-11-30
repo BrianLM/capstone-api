@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 class UserProfile < ApplicationRecord
   belongs_to :user
-
+  has_one :exploration, through: :user
+  has_one :encounter, through: :user
+  has_one :creature, through: :user
+  has_many :items, through: :user
   after_initialize :set_defaults, unless: :persisted?
 
   def set_defaults
