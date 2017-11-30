@@ -140,7 +140,6 @@ class ExplorationsController < ProtectedController
     @user_creature.update(c_hp: restore, damage: 0)
     resolve_exploration if @exploration.step == @exploration.end &&
                            @user_creature.c_hp.positive?
-
     @current_user_profile.save
   end
 
@@ -163,11 +162,11 @@ class ExplorationsController < ProtectedController
     @current_user_profile.experience += @exploration.dif
     to_level = Level.find_by(level: @current_user_profile.level).required
     if to_level == @current_user_profile.experience
-      @current_user_profile.level += 1
       level_up = Level.find_by(level: @current_user_profile.level)
+      @current_user_profile.level += 1
       @current_user_profile.energy = level_up.energy
       @current_user_profile.experience = 0
-      @current_user.stat_points += 1
+      @current_user_profile.stat_points += 1
     end
   end
 

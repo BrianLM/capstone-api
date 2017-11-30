@@ -11,8 +11,9 @@ class UserProfilesController < ProtectedController
     if recovery > max_energy || recovery == max_energy
       @user_profile.update(energy: max_energy, els: nil)
     else
+      new_energy = recovery + @user_profile.energy
       new_els = last_spent + (recovery * 180)
-      @user_profile.update(energy: recovery, els: new_els)
+      @user_profile.update(energy: new_energy, els: new_els)
     end
   end
 
