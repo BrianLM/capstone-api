@@ -7,9 +7,8 @@ class UserProfilesController < ProtectedController
     last_spent = @user_profile.els
     time_diff =  (DateTime.now.utc - last_spent).to_i
     recovery = (time_diff / 180) / 3
-    max_energy = Level.find_by(level: @user_profile.level).energy
-    if recovery > max_energy || recovery == max_energy
-      @user_profile.update(energy: max_energy, els: nil)
+    if recovery > @max_energy || recovery == max_energy
+      @user_profile.update(energy: @max_energy, els: nil)
     else
       new_energy = recovery + @user_profile.energy
       new_els = last_spent + (recovery * 180)
@@ -19,6 +18,8 @@ class UserProfilesController < ProtectedController
 
   # GET /user_profiles/1
   def show
+    @max_energy = Level.find_by(level: @user_profile.level).energy
+    @user_profile.update(els: nil) if @max_energy == @user_profile.energy
     check_energy unless @user_profile.els.nil?
     render json: @user_profile
   end
