@@ -196,7 +196,7 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rails_12factor (~> 0.0.3)
   rspec-rails (~> 3.5)
-  rubocop (~> 0.48.1)
+  rubocop (~> 0.46)
   spring (~> 1.6)
   spring-commands-rspec (~> 1.0)
 
