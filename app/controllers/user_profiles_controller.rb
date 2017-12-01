@@ -26,9 +26,7 @@ class UserProfilesController < ProtectedController
 
   # POST /user_profiles
   def create
-    @user_profile = UserProfile.new(user_profile_params)
-
-    if @user_profile.save
+    if current_user.create_user_profile
       render json: @user_profile, status: :created, location: @user_profile
     else
       render json: @user_profile.errors, status: :unprocessable_entity

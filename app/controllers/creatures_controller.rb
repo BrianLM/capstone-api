@@ -63,9 +63,7 @@ class CreaturesController < ProtectedController
   end
 
   def do_increase
-    p 'In do_increase'
     @creature[@stat] += creature_params[@stat]
-    p @creature[@stat]
     diff = current_user.user_profile.stat_points - @requested
     current_user.user_profile.update(stat_points: diff)
   end
