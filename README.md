@@ -5,7 +5,7 @@ This API is designed to support the Smart-Shop application for reuse over the in
 The API sanitizes request per user but does not validate naming and prior presence of items.
 
 ## Deployment
-The production database is hosted by Heroku at https://fast-taiga-19098.herokuapp.com
+The production database is hosted by Heroku at https://fast-stream-81519.herokuapp.com/user_profiles/2.
 
 ## Technologies used
 API is written with Rails, utilizing the standard ActiveRecord, Ruby, along with custom routing and serialization.
