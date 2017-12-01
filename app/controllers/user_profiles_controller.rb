@@ -18,6 +18,7 @@ class UserProfilesController < ProtectedController
 
   # GET /user_profiles/1
   def show
+    current_user.create_exploration unless current_user.exploration
     @max_energy = Level.find_by(level: @user_profile.level).energy
     @user_profile.update(els: nil) if @max_energy == @user_profile.energy
     check_energy unless @user_profile.els.nil?

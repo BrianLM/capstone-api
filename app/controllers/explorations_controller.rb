@@ -206,6 +206,7 @@ class ExplorationsController < ProtectedController
 
   # PATCH/PUT /explorations/1
   def update
+    current_user.create_creature unless current_user.creature
     do_step if params.key? :move
     do_start if !@errors.present? && (params.key? :start)
     do_attack if !@errors.present? && (params.key? :attack)
